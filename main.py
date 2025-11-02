@@ -1,3 +1,4 @@
+from datetime import datetime
 from time import sleep
 import requests
 
@@ -70,10 +71,51 @@ class ProximaProject:
             astronauts_dictionary["number"] = astronauts_number
 
             return astronauts_dictionary
-        
+
         else:
             print(f"Error {astronauts_tracking_response.status_code}")
 
+    def picture_of_the_day(self) -> dict:
+        """Fetch the astronomy picture of the day (APOD) from the NASA Open APIs.
+        """
+        APOD_API_KEY_FILE = ".env"
+        PICTURE_OF_THE_DAY_URL = "https://api.nasa.gov/planetary/apod"
+
+        # Fetching current date
+        actual_year = datetime.now().year
+        actual_month = datetime.now().month
+        actual_day = datetime.now().day
+
+        # Looking for pictures in archvives
+        archive_year = actual_year - 5
+
+        full_date = f"{archive_year}-{actual_month}-{actual_day}"
+
+        # Looking for one more year in the back to show daily pictures
+        if full_date == "2025-10-1":
+            archive_year -= 1
+            full_date = f"{archive_year}-{actual_month}-{actual_day}"
+
+        # Fetching API key
+        with open(APOD_API_KEY_FILE, "r") as key_file:
+            APOD_API_KEY = key_file.read().split()
+            
+        # Concatenate the full API request link
+        full_api_link = f"{PICTURE_OF_THE_DAY_URL}?api_key={APOD_API_KEY[-1]}&date={full_date}"
+
+        apod_response = requests.get(full_api_link)
+
+        if apod_response.status_code == 200:
+            apod_data = apod_response.json()
+            
+            # Removing useless information
+            del apod_data["service_version"]
+            
+            return apod_data
+        else:
+            return {"Error": apod_response.status_code}
+
+
 if __name__ == "__main__":
     p = ProximaProject()
-    p.astronauts_tracking()
+    print(p.picture_of_the_day())
