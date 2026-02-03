@@ -1,4 +1,3 @@
-from datetime import datetime
 import requests
 
 class ProjetProxima:
@@ -89,27 +88,12 @@ class ProjetProxima:
         APOD_API_KEY_FILE = ".env"
         PICTURE_OF_THE_DAY_URL = "https://api.nasa.gov/planetary/apod"
 
-        # Fetching current date
-        actual_year = datetime.now().year
-        actual_month = datetime.now().month
-        actual_day = datetime.now().day
-
-        # Looking for pictures in archvives
-        archive_year = actual_year - 5
-
-        full_date = f"{archive_year}-{actual_month}-{actual_day}"
-
-        # Looking for one more year in the back to show daily pictures
-        if full_date == "2025-10-1":
-            archive_year -= 1
-            full_date = f"{archive_year}-{actual_month}-{actual_day}"
-
         # Fetching API key
         with open(APOD_API_KEY_FILE, "r") as key_file:
             APOD_API_KEY = key_file.read().split()
 
         # Concatenate the full API request link
-        full_api_link = (f"{PICTURE_OF_THE_DAY_URL}?api_key={APOD_API_KEY[-1]}&date={full_date}")
+        full_api_link = (f"{PICTURE_OF_THE_DAY_URL}?api_key={APOD_API_KEY[-1]}")
 
         apod_response = requests.get(full_api_link)
 
@@ -125,3 +109,4 @@ class ProjetProxima:
 
 if __name__ == "__main__":
     p = ProjetProxima()
+    print(p.astronauts_tracking())
