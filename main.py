@@ -37,6 +37,8 @@ class ProjetProxima:
             iss_location["longitude"] = iss_longitude
             iss_location["latitude"] = iss_latitude
 
+            self.iss_location_historical(iss_location)
+
             return iss_location
 
         else:
@@ -115,6 +117,11 @@ class ProjetProxima:
             return apod_data
         else:
             return {"Error": apod_response.status_code}
+        
+    def iss_location_historical(self, dict_iss_location):
+        """Enregistrement de toutes les coordonées de l'ISS dans un fichier Json.
+        """
+        print(f"L'iss était en {dict_iss_location}")
 
 if __name__ == "__main__":
     p = ProjetProxima()
