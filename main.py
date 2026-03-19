@@ -21,7 +21,10 @@ class ProjetProxima:
         iss_location = {}
 
         # Fetch request response
-        iss_tracking_response = requests.get(ISS_TRACKING_URL)
+        try:
+            iss_tracking_response = requests.get(ISS_TRACKING_URL)
+        except:
+            return {"Erreur": "Une erreur est survenu !"}
 
         # Response status code verification
         if iss_tracking_response.status_code == 200:
@@ -50,7 +53,10 @@ class ProjetProxima:
 
         ASTRONAUTS_TRACKING_API_URL = "http://api.open-notify.org/astros.json"
 
-        astronauts_tracking_response = requests.get(ASTRONAUTS_TRACKING_API_URL)
+        try:
+            astronauts_tracking_response = requests.get(ASTRONAUTS_TRACKING_API_URL)
+        except:
+            return {"Erreur": "Une erreur est survenu !"}
 
         # Dictionary for all astronauts
         astronauts_dictionary: dict[str, object] = {"astronauts": []}
@@ -95,7 +101,10 @@ class ProjetProxima:
         # Concatenate the full API request link
         full_api_link = (f"{PICTURE_OF_THE_DAY_URL}?api_key={APOD_API_KEY[-1]}")
 
-        apod_response = requests.get(full_api_link)
+        try:
+            apod_response = requests.get(full_api_link)
+        except:
+            return {"Erreur": "Une erreur est survenu !"}
 
         if apod_response.status_code == 200:
             apod_data = apod_response.json()
@@ -109,4 +118,12 @@ class ProjetProxima:
 
 if __name__ == "__main__":
     p = ProjetProxima()
+    print(p.iss_tracking())
+    print("\n")
+    print("-" * 100)
+    print("\n")
     print(p.astronauts_tracking())
+    print("\n")
+    print("-" * 100)
+    print("\n")
+    print(p.picture_of_the_day())
