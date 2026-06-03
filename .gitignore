@@ -1,3 +1,4 @@
 .env
 requirements.in
 .vscode
+__pycache__
