@@ -10,7 +10,7 @@ from PyQt6.QtSvg import QSvgRenderer
 
 from main import ProjetProxima
 
-# ── Style ────────────────────────────────────────────────────────────────────
+# Style
 
 DARK_BG   = "#0d1117"
 CARD_BG   = "#161b22"
@@ -34,7 +34,7 @@ BASE_STYLE = f"""
     QScrollArea {{ border: none; }}
 """
 
-# ── Worker threads ────────────────────────────────────────────────────────────
+# Worker threads
 
 class ISSWorker(QThread):
     done = pyqtSignal(dict, dict)
@@ -52,7 +52,7 @@ class APODWorker(QThread):
         self.done.emit(p.picture_of_the_day())
 
 
-# ── Map widget ────────────────────────────────────────────────────────────────
+# Map widget
 
 class MapWidget(QWidget):
     """Renders world_map.svg via QSvgRenderer and overlays the ISS marker."""
@@ -111,7 +111,7 @@ class MapWidget(QWidget):
         painter.end()
 
 
-# ── Pages ─────────────────────────────────────────────────────────────────────
+# Pages
 
 class MenuPage(QWidget):
     def __init__(self, on_iss, on_apod):
@@ -393,7 +393,7 @@ class APODPage(QWidget):
         reply.deleteLater()
 
 
-# ── Main window ───────────────────────────────────────────────────────────────
+# Main window
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -424,7 +424,7 @@ class MainWindow(QMainWindow):
         self.apod_page.load()
 
 
-# ── Entry point ───────────────────────────────────────────────────────────────
+# Entry point
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
