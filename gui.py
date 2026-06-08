@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QStackedWidget,
     QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QScrollArea, QFrame
 )
-from PyQt6.QtGui import QPixmap, QPainter, QColor, QFont, QPen, QPainterPath, QBrush
+from PyQt6.QtGui import QPixmap, QPainter, QColor, QFont, QPen
 from PyQt6.QtCore import Qt, QThread, pyqtSignal, QPointF, QUrl, QRectF
 from PyQt6.QtNetwork import QNetworkAccessManager, QNetworkRequest
 from PyQt6.QtSvg import QSvgRenderer
@@ -50,7 +50,6 @@ class APODWorker(QThread):
     def run(self):
         p = ProjetProxima()
         self.done.emit(p.picture_of_the_day())
-
 
 # Map widget
 
@@ -110,7 +109,6 @@ class MapWidget(QWidget):
 
         painter.end()
 
-
 # Pages
 
 class MenuPage(QWidget):
@@ -144,7 +142,6 @@ class MenuPage(QWidget):
         layout.addSpacing(30)
         layout.addWidget(btn_iss, alignment=Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(btn_apod, alignment=Qt.AlignmentFlag.AlignCenter)
-
 
 class ISSPage(QWidget):
     def __init__(self, on_back):
@@ -242,7 +239,6 @@ class ISSPage(QWidget):
             count_label.setStyleSheet(f"color: {MUTED}; font-size: 12px;")
             count_label.setAlignment(Qt.AlignmentFlag.AlignVCenter)
             self.astro_layout.addWidget(count_label)
-
 
 class APODPage(QWidget):
     def __init__(self, on_back):
@@ -392,7 +388,6 @@ class APODPage(QWidget):
             self.content_layout.insertWidget(idx, container)
         reply.deleteLater()
 
-
 # Main window
 
 class MainWindow(QMainWindow):
@@ -422,7 +417,6 @@ class MainWindow(QMainWindow):
     def _show_apod(self):
         self.stack.setCurrentIndex(2)
         self.apod_page.load()
-
 
 # Entry point
 
