@@ -127,7 +127,7 @@ class MenuPage(QWidget):
         subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
         subtitle.setStyleSheet(f"color: {MUTED}; font-size: 15px;")
 
-        btn_iss = QPushButton("🛰  Position de l'ISS & astronautes")
+        btn_iss = QPushButton("🛰  Position de l'ISS et astronautes")
         btn_iss.setFixedWidth(320)
         btn_iss.setFixedHeight(52)
         btn_iss.clicked.connect(on_iss)
