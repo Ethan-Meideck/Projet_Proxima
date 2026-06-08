@@ -2,3 +2,5 @@
 requirements.in
 .vscode
 __pycache__
+build/
+gui.spec
